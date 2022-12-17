@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block body_containt %}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/blogs">Blogs</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{blog.title}}</li>
+        </ol>
+    </nav>
+    <img class="bd-placeholder-img card-img-top" src="/media/{{blog.img}}" width="100%" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+
+    <div class="blog_body">
+        <div class="mt-3">
+            <b>{{blog.title}}</b>
+            <div style="float:right">{{blog.created_by}} | {{blog.created_date}}</div>
+        </div>
+        <hr><br>
+        <p class="text">{{blog.short_content}}</p>
+        <div class="d-flex justify-content-between align-items-center">           
+            {{blog.long_content}}        
+        </div>
+    </div>
+</div>
+{% endblock %}
