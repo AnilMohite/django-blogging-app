@@ -3,31 +3,27 @@
 /*Google font integration*/
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-#contact{
-    /* background-color:#f1f1f1; */
-    font-family: 'Roboto', sans-serif;
+.body_containt{
+    min-height: 100vh;
 }
+/* ------------ login / register page ------------ */
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+.h-custom {
+    height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
+/* ------------ login / register page ------------ */
 
-#contact .well{
-    margin-top:30px;
-    border-radius:0;
-}
-
-#contact .form-control{
-    border-radius: 0;
-    border:2px solid #1e1e1e;
-}
-#contact .form-group{
-    margin-bottom: 10px;
-}
-#contact button{
-    border-radius:0;
-    border:2px solid #1e1e1e;
-}
-
-#contact .row{
-    margin-bottom:30px;
-}
 
 @media (max-width: 768px) { 
     #contact iframe {
@@ -35,3 +31,4 @@
     }
     
 }
+

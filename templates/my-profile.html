@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block body_containt %}
+<section>
+    <div class="container-fluid h-custom">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-12 col-lg-12 col-xl-12">        
+            {% for message in messages %}
+                <div class="alert alert-dismissible fade show alert-{{ message.tags }}" role="alert" data-mdb-color="{{ message.tags }}" id="error-message">
+                <strong> {{ message }}</strong>
+                <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+            <form method="POST">
+                {% csrf_token %}
+                <p class="lead fw-normal me-3">Profile Update</p>
+                
+                <input type="hidden" name="form_type" value="profile_update">
+                <!-- Name input -->
+                <div class="input-group mb-4">
+                <div class="form-outline me-2">
+                    <input type="text" id="registerName" class="form-control" name="first_name" value="{{user.first_name}}"/>
+                    <label class="form-label" for="registerName">First Name</label>
+                </div>
+                <div class="form-outline">
+                    <input type="text" id="registerName" class="form-control" name="last_name" value="{{user.last_name}}"/>
+                    <label class="form-label" for="registerName">Last Name</label>
+                </div>
+                </div>
+
+                <!-- Username input -->
+                <div class="form-outline mb-4">
+                    <input type="text" id="registerUsername" class="form-control" name="username" value="{{user.username}}" disabled/>
+                    <label class="form-label" for="registerUsername">Username</label>
+                </div>
+
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    <input type="email" id="registerEmail" class="form-control" name="email" value="{{user.email}}" disabled/>
+                    <label class="form-label" for="registerEmail">Email</label>
+                </div>
+
+
+                <!-- Submit button -->
+                <div class="text-center text-lg-start mt-4 pt-2">
+                    <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Update</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+            <form method="POST">
+                {% csrf_token %}
+                <p class="lead fw-normal me-3">Change Password</p>
+                
+                <input type="hidden" name="form_type" value="password_update">
+                <!-- Name input -->
+                <div class="form-outline mb-4">
+                <input type="text" id="old_password" class="form-control" name="old_password" value=""/>
+                <label class="form-label" for="old_password">Old Password</label>
+                </div>
+
+                <div class="form-outline mb-4">
+                <input type="text" id="new_password" class="form-control" name="new_password" value=""/>
+                <label class="form-label" for="new_password">New Password</label>
+                </div>
+            
+
+                <!-- Username input -->
+                <div class="form-outline mb-4">
+                <input type="text" id="confirm_new_password" class="form-control" name="confirm_new_password" value=""/>
+                <label class="form-label" for="confirm_new_password">Confirm New Password</label>
+                </div>
+
+                <!-- Submit button -->
+                <div class="text-center text-lg-start mt-4 pt-2">
+                <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Update</button>
+                </div>
+            </form>
+          </div>
+      </div>
+    </div>
+    
+  </section>
+{% endblock %}

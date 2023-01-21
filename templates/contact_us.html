@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block body_containt %}
-<div class="container">
+<div class="container vh-100">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -11,28 +11,41 @@
       
       <div class="row">
         <div class="col-md-7">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d3736489.7218514383!2d90.21589792292741!3d23.857125486636733!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1506502314230" width="100%" height="324" frameborder="0" style="border:0" allowfullscreen></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d30688665.826026157!2d64.40283707327586!3d20.12674432253135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1674279054507!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
     
           <div class="col-md-5">
-              <h4><strong>Get in Touch</strong></h4>
-            <form>
-              <div class="form-group">
-                <input type="text" class="form-control" name="" value="" placeholder="Name">
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" name="" value="" placeholder="E-mail">
-              </div>
-              <div class="form-group">
-                <input type="tel" class="form-control" name="" value="" placeholder="Phone">
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" name="" rows="3" placeholder="Message"></textarea>
-              </div>
-              <button class="btn btn-success" type="submit" name="button">
-                  <i class="fa fa-paper-plane-o" aria-hidden="true"></i> Submit
-              </button>
-            </form>
+              <p class="lead fw-normal me-3">Get in Touch</p>
+              <form>
+                <!-- Name input -->
+                <div class="form-outline mb-4">
+                  <input type="text" id="form4Example1" class="form-control" />
+                  <label class="form-label" for="form4Example1">Name</label>
+                </div>
+              
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <input type="email" id="form4Example2" class="form-control" />
+                  <label class="form-label" for="form4Example2">Email address</label>
+                </div>
+              
+                <!-- Message input -->
+                <div class="form-outline mb-4">
+                  <textarea class="form-control" id="form4Example3" rows="4"></textarea>
+                  <label class="form-label" for="form4Example3">Message</label>
+                </div>
+              
+                <!-- Checkbox -->
+                <div class="form-check d-flex justify-content-center mb-4">
+                  <input class="form-check-input me-2" type="checkbox" value="" id="form4Example4" checked />
+                  <label class="form-check-label" for="form4Example4">
+                    Send me a copy of this message
+                  </label>
+                </div>
+              
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
+              </form>
           </div>
         </div>
     </section>
