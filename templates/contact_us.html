@@ -16,31 +16,31 @@
     
           <div class="col-md-5">
               <p class="lead fw-normal me-3">Get in Touch</p>
-              <form>
+              <form method="POST">
+                {% csrf_token %}
+
+                {% for message in messages %}
+                    <div class="alert alert-dismissible fade show alert-{{ message.tags }}" role="alert" data-mdb-color="{{ message.tags }}" id="error-message">
+                    <strong> {{ message }}</strong>
+                    <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
                 <!-- Name input -->
                 <div class="form-outline mb-4">
-                  <input type="text" id="form4Example1" class="form-control" />
+                  <input type="text" id="form4Example1" class="form-control" name="name"/>
                   <label class="form-label" for="form4Example1">Name</label>
                 </div>
               
                 <!-- Email input -->
                 <div class="form-outline mb-4">
-                  <input type="email" id="form4Example2" class="form-control" />
+                  <input type="email" id="form4Example2" class="form-control" name="email"/>
                   <label class="form-label" for="form4Example2">Email address</label>
                 </div>
               
                 <!-- Message input -->
                 <div class="form-outline mb-4">
-                  <textarea class="form-control" id="form4Example3" rows="4"></textarea>
+                  <textarea class="form-control" id="form4Example3" rows="4" name="message"></textarea>
                   <label class="form-label" for="form4Example3">Message</label>
-                </div>
-              
-                <!-- Checkbox -->
-                <div class="form-check d-flex justify-content-center mb-4">
-                  <input class="form-check-input me-2" type="checkbox" value="" id="form4Example4" checked />
-                  <label class="form-check-label" for="form4Example4">
-                    Send me a copy of this message
-                  </label>
                 </div>
               
                 <!-- Submit button -->
