@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import *
 from django.core.paginator import Paginator
+from django.contrib import messages
+import datetime
 
 # Create your views here.
 def index(request):
@@ -22,4 +24,11 @@ def about(request):
     return render(request,'about.html')
 
 def contact(request):
+    if request.method == "POST":
+        name = request.POST['name']
+        email = request.POST['email']
+        message = request.POST['message']
+        cus = Contact(name=name,email=email,message=message,created_date=datetime.datetime.now())
+        cus.save()
+        messages.success(request, 'Thank you for contacting us. We will get back to you soon...')
     return render(request,'contact_us.html')

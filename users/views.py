@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate,login,logout,update_session_auth_ha
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from blogs.models import Blog
 
 # Create your views here.
 def loginUser(request):
@@ -84,3 +85,13 @@ def myProfile(request):
                     messages.warning(request,'Incorrect password, please try again!')
 
     return render(request, 'my-profile.html', context={"user":user})
+
+@login_required(login_url='login')
+def myBlogs(request):
+    blogObj = Blog.objects.order_by('-created_date').all()
+    if request.user.is_superuser:
+        blogs = blogObj
+    else:
+        blogs = blogObj.filter(user_id=request.user)
+    return render(request,'my-blogs.html',context={"blogs":blogs})
+        
