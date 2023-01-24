@@ -1,0 +1,36 @@
+/*Font-awesome integration*/
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+/*Google font integration*/
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.body_containt{
+    min-height: 100vh;
+}
+
+/* ------------ login / register page ------------ */
+.divider:after,
+.divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+.h-custom {
+    height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
+/* ------------ login / register page ------------ */
+.toggle-confirmation{
+	display: flex;
+}
+
+@media (max-width: 768px) { 
+    #contact iframe {
+        margin-bottom: 15px;
+    }
+    
+}

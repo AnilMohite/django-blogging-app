@@ -5,6 +5,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from blogs.models import Blog
+import os
+from django.conf import settings
 
 # Create your views here.
 def loginUser(request):
@@ -95,3 +97,19 @@ def myBlogs(request):
         blogs = blogObj.filter(user_id=request.user)
     return render(request,'my-blogs.html',context={"blogs":blogs})
         
+@login_required(login_url='login')
+def deleteBlog(request,id):
+    blogObj = Blog.objects.get(id=id)
+    try:
+        if blogObj.user_id == request.user or request.user.is_superuser:
+            if blogObj.img.name:
+                imgPath = os.path.join(settings.MEDIA_ROOT,blogObj.img.name)
+                os.remove(imgPath)
+            blogObj.delete()
+            messages.success(request, 'Blog deleted successfully!')
+        else:
+            messages.success(request, 'Unauthorized!')
+    except Exception as e:
+        print(e)
+
+    return redirect('my-blogs')

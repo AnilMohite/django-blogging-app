@@ -16,7 +16,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css"
     rel="stylesheet"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/app.js' %}"></script>
 </head>
 
 <body>
@@ -33,7 +35,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Navbar brand -->
           <a class="navbar-brand mt-2 mt-lg-0" href="#">
-            <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="15" alt="Logo" loading="lazy"/>
+            <img src="/media/logo.png" height="40" alt="Logo" loading="lazy"/>
           </a>
           <!-- Left links -->
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -93,8 +95,32 @@
     <!-- Navbar -->
   
     <div class="body_containt">
+      
     {% block body_containt %}
     {% endblock %}
+
+    
+    <!-- popup Modal -->
+    <div class="modal fade show" id="popupModal" tabindex="-1"
+    aria-labelledby="popupModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content text-center">
+            <div class="modal-header bg-danger text-white d-flex justify-content-center">
+              <h5 class="modal-title" id="confirmationMessage">Are you sure?</h5>
+            </div>
+            <div class="modal-body">
+              <i class="fas fa-times fa-3x text-danger"></i>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <button type="button" class="btn btn-danger" onclick="closeConfirmationBox()">No</button>
+              <button type="button" id="userConfirmed" class="btn btn-outline-danger">
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
     </div>
     <footer>
         <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">

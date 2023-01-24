@@ -30,5 +30,5 @@ def contact(request):
         message = request.POST['message']
         cus = Contact(name=name,email=email,message=message,created_date=datetime.datetime.now())
         cus.save()
-        messages.success(request, 'Thank you for contacting us. We will get back to you soon...')
+        messages.success(request, 'Thank you for visiting our website and we look forward to connecting with you!')
     return render(request,'contact_us.html')

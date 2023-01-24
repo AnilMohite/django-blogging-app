@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% block body_containt %}
-<section>
+<section class="blogList">
+  
+  {% for message in messages %}
+    <div class="alert alert-dismissible fade show alert-{{ message.tags }}" role="alert" data-mdb-color="{{ message.tags }}" id="error-message">
+    <strong> {{ message }}</strong>
+    <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
     <table class="table table-striped">
         <thead>
             <tr>
@@ -19,34 +26,14 @@
                 <td>{{blog.title}}</td>
                 <!-- <td>{{blog.slug}}</td> -->
                 <td>{{blog.created_by}}</td>
-                <td>{{blog.created_date}}</td>
+                <td>{{blog.created_date|date:"M d, Y h:i A"}}</td>
                 <td>
                     <a href='#' class="btn btn-sm btn-warning"><i class="fas fa-highlighter"></i></a>
-                    <a href='#' class="btn btn-sm btn-danger" data-mdb-toggle="modal"
-                        data-mdb-target="#deleteModal-{{blog.id}}"><i class="fas fa-trash"></i></a>
+                    {% comment %} <a href='#' class="btn btn-sm btn-danger" data-mdb-toggle="modal" data-mdb-target="#deleteModal-{{blog.id}}"><i class="fas fa-trash"></i></a> {% endcomment %}
+                    <a href='#' class="btn btn-sm btn-danger" id="delBlogBtn-{{blog.id}}" onclick="delBlog(this.id)"><i class="fas fa-trash"></i></a>
                 </td>
             </tr>
 
-            <!-- Delete Modal -->
-            <div class="modal fade show" id="deleteModal-{{blog.id}}" tabindex="-1"
-            aria-labelledby="deleteModalLabel-{{blog.id}}" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                  <div class="modal-content text-center">
-                    <div class="modal-header bg-danger text-white d-flex justify-content-center">
-                      <h5 class="modal-title" id="deleteModalLabel-{{blog.id}}">Are you sure?</h5>
-                    </div>
-                    <div class="modal-body">
-                      <i class="fas fa-times fa-3x text-danger"></i>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                      <button type="button" class="btn btn-danger" data-mdb-dismiss="modal">No</button>
-                      <button type="button" class="btn btn-outline-danger" data-mdb-dismiss="modal">
-                        Yes
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
             {% endfor %}
         </tbody>
     </table>
