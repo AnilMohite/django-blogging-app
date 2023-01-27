@@ -18,7 +18,7 @@ def blogs(request):
 
 def blog(request,slug):
     blog = Blog.objects.filter(slug=slug).first()
-    return render(request,'blog_view.html',context={'blog':blog})
+    return render(request,'blog-view.html',context={'blog':blog})
 
 def about(request):
     return render(request,'about.html')
@@ -31,4 +31,4 @@ def contact(request):
         cus = Contact(name=name,email=email,message=message,created_date=datetime.datetime.now())
         cus.save()
         messages.success(request, 'Thank you for visiting our website and we look forward to connecting with you!')
-    return render(request,'contact_us.html')
+    return render(request,'contact-us.html')

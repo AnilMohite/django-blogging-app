@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block body_containt %}
-<section class="blogList">
-  
+<section class="container blogList">
+    <div class="mb-4 float-right">
+        <a href="/user/add-blog" class="btn btn-info">Add Blog</a>
+    </div>
   {% for message in messages %}
     <div class="alert alert-dismissible fade show alert-{{ message.tags }}" role="alert" data-mdb-color="{{ message.tags }}" id="error-message">
     <strong> {{ message }}</strong>
@@ -28,7 +30,7 @@
                 <td>{{blog.created_by}}</td>
                 <td>{{blog.created_date|date:"M d, Y h:i A"}}</td>
                 <td>
-                    <a href='#' class="btn btn-sm btn-warning"><i class="fas fa-highlighter"></i></a>
+                    <a href='/user/update-blog/{{blog.id}}' class="btn btn-sm btn-warning"><i class="fas fa-highlighter"></i></a>
                     {% comment %} <a href='#' class="btn btn-sm btn-danger" data-mdb-toggle="modal" data-mdb-target="#deleteModal-{{blog.id}}"><i class="fas fa-trash"></i></a> {% endcomment %}
                     <a href='#' class="btn btn-sm btn-danger" id="delBlogBtn-{{blog.id}}" onclick="delBlog(this.id)"><i class="fas fa-trash"></i></a>
                 </td>

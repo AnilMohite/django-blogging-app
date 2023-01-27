@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from blogs.models import Blog
 import os
 from django.conf import settings
+import datetime
 
 # Create your views here.
 def loginUser(request):
@@ -98,8 +99,8 @@ def myBlogs(request):
     return render(request,'my-blogs.html',context={"blogs":blogs})
         
 @login_required(login_url='login')
-def deleteBlog(request,id):
-    blogObj = Blog.objects.get(id=id)
+def deleteBlog(request,pk):
+    blogObj = Blog.objects.get(id=pk)
     try:
         if blogObj.user_id == request.user or request.user.is_superuser:
             if blogObj.img.name:
@@ -113,3 +114,34 @@ def deleteBlog(request,id):
         print(e)
 
     return redirect('my-blogs')
+
+@login_required(login_url='login')
+def addBlog(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        short_content = request.POST.get('short_content')
+        long_content = request.POST.get('long_content')
+        blog_image = request.FILES['blog_image']
+        user = request.user
+        
+        Blog.objects.create(title=title,short_content=short_content,long_content=long_content,img=blog_image,created_by=request.user,user_id=user,created_date=datetime.datetime.now())
+        messages.success(request,'Blog save successfully!')
+        return redirect('my-blogs')
+    return render(request,'add-blog.html',context={})
+
+def updateBlog(request,pk):
+    context = {}
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        short_content = request.POST.get('short_content')
+        long_content = request.POST.get('long_content')
+        blog_image = request.FILES['blog_image']
+        user = request.user
+        
+        Blog.objects.create(title=title,short_content=short_content,long_content=long_content,img=blog_image,created_by=request.user,user_id=user,created_date=datetime.datetime.now())
+        messages.success(request,'Blog updated successfully!')
+        return redirect('my-blogs')
+    else:
+        blogObj = Blog.objects.get(id=pk)
+        context['blog_obj'] = blogObj
+    return render(request,'update-blog.html',context=context)

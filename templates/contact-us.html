@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block body_containt %}
+<div class="container vh-100">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+        </ol>
+    </nav>
+    <section id="contact">
+      
+      <div class="row">
+        <div class="col-md-7">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d30688665.826026157!2d64.40283707327586!3d20.12674432253135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1674279054507!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+    
+          <div class="col-md-5">
+              <p class="lead fw-normal me-3">Get in Touch</p>
+              <p>If you have any questions or suggestions for future content, please don't hesitate to contact us.
+                </p>
+              <form method="POST">
+                {% csrf_token %}
+
+                {% for message in messages %}
+                    <div class="alert alert-dismissible fade show alert-{{ message.tags }}" role="alert" data-mdb-color="{{ message.tags }}" id="error-message">
+                    <strong> {{ message }}</strong>
+                    <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+                <!-- Name input -->
+                <div class="form-outline mb-4">
+                  <input type="text" id="form4Example1" class="form-control" name="name"/>
+                  <label class="form-label" for="form4Example1">Name</label>
+                </div>
+              
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <input type="email" id="form4Example2" class="form-control" name="email"/>
+                  <label class="form-label" for="form4Example2">Email address</label>
+                </div>
+              
+                <!-- Message input -->
+                <div class="form-outline mb-4">
+                  <textarea class="form-control" id="form4Example3" rows="4" name="message"></textarea>
+                  <label class="form-label" for="form4Example3">Message</label>
+                </div>
+              
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
+              </form>
+          </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
