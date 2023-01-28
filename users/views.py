@@ -91,12 +91,18 @@ def myProfile(request):
 
 @login_required(login_url='login')
 def myBlogs(request):
-    blogObj = Blog.objects.order_by('-created_date').all()
-    if request.user.is_superuser:
-        blogs = blogObj
-    else:
-        blogs = blogObj.filter(user_id=request.user)
-    return render(request,'my-blogs.html',context={"blogs":blogs})
+    context ={}
+    try:
+        blog_objs = Blog.objects.filter(user_id = request.user)
+        context['approved_blogs'] = blog_objs.filter(is_approved = True)
+        context['not_sent_for_approval'] = blog_objs.filter(is_ready_for_review = False).filter(is_approved = False)
+        context['pending_review'] = blog_objs.filter(is_ready_for_review = True).filter(is_approved = False)
+        # context['blogs_obj'] = blog_objs
+
+    except Exception as e:
+        print(e)
+    print(context)
+    return render(request,'my-blogs.html',context=context)
         
 @login_required(login_url='login')
 def deleteBlog(request,pk):
@@ -131,17 +137,45 @@ def addBlog(request):
 
 def updateBlog(request,pk):
     context = {}
+    blogObj = Blog.objects.get(id=pk)
     if request.method == 'POST':
-        title = request.POST.get('title')
-        short_content = request.POST.get('short_content')
-        long_content = request.POST.get('long_content')
-        blog_image = request.FILES['blog_image']
-        user = request.user
-        
-        Blog.objects.create(title=title,short_content=short_content,long_content=long_content,img=blog_image,created_by=request.user,user_id=user,created_date=datetime.datetime.now())
-        messages.success(request,'Blog updated successfully!')
-        return redirect('my-blogs')
+        if (request.user==blogObj.user_id) or (request.user.is_superuser):
+            
+            blogObj.title = request.POST.get('title')
+            blogObj.short_content = request.POST.get('short_content')
+            blogObj.long_content = request.POST.get('long_content')
+            blog_image = request.FILES.get('blog_image')
+
+            old_img = blogObj.img.name
+            if not blog_image is None:
+                try:
+                    os.remove(os.path.join(settings.MEDIA_ROOT, old_img))
+                    blogObj.img = blog_image
+                except:
+                    messages.warning(request, f"Unable to update blog picture!")
+
+            blogObj.is_approved = False
+            blogObj.created_by = request.user.username
+            blogObj.created_date = datetime.datetime.now()
+            blogObj.save()
+            messages.success(request,'Blog updated successfully!')
+            return redirect('my-blogs')
+        else:
+            return redirect('/')
     else:
-        blogObj = Blog.objects.get(id=pk)
         context['blog_obj'] = blogObj
     return render(request,'update-blog.html',context=context)
+
+def sendForReview(request,pk):
+    print('asf',pk)
+    blogForReview = Blog.objects.get(id=pk)
+    if blogForReview.is_ready_for_review == False:
+        blogForReview.is_ready_for_review = True
+        messages.success(request, 'Blog Sent for a Review!')
+    else:
+        blogForReview.is_ready_for_review = False
+        messages.success(request, 'Blog Withdrawn form a Review!')
+    blogForReview.save()
+
+    return redirect('/user/my-blogs/')
+    

@@ -14,6 +14,11 @@ class Blog(models.Model):
     created_by = models.CharField(max_length=50)
     created_date = models.DateTimeField()
 
+    is_approved = models.BooleanField(default=False)
+    is_ready_for_review = models.BooleanField(default=False)
+    approved_date = models.DateTimeField(null=True, blank=True)
+    approved_by = models.CharField(max_length=255, null=True, blank=True)
+
     def __str__(self):
         return self.title +" : "+self.created_by 
 

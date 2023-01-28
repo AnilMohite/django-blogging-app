@@ -6,11 +6,11 @@ import datetime
 
 # Create your views here.
 def index(request):
-    blogs = Blog.objects.all().order_by('-created_date')[:3]
+    blogs = Blog.objects.filter(is_approved=True).all().order_by('-created_date')[:3]
     return render(request,'index.html',context={'blogs':blogs})
 
 def blogs(request):
-    blogs = Blog.objects.all().order_by('-created_date')
+    blogs = Blog.objects.filter(is_approved=True).all().order_by('-created_date')
     paginator = Paginator(blogs, 3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

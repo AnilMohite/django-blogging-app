@@ -28,18 +28,22 @@
                 <textarea class="form-control" id="long_content" rows="4" name="long_content">{{blog_obj.long_content}}</textarea>
                 <label class="form-label" for="long_content">Long Content</label>
             </div>
-            
-            <div class="form-outline mb-4">
+
+            <div class="mb-4">
                 <label class="form-label" for="blog_image">Image</label>
-                <input type="file" class="form-control" id="blog_image" name="blog_image"/>
+                <img src="{{blog_obj.img.url}}" width="100px" alt="blog-img">
             </div>
 
+            <div class="form-outline mb-4">
+                <input type="file" class="form-control" id="blog_image" name="blog_image"/>
+            </div>
 
             <!-- Submit button -->
             <div class="text-center text-lg-start mt-4 pt-2">
               <button type="submit" class="btn btn-primary btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Save</button>
               <a href="/user/my-blogs" type="button" class="btn btn-danger btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem;">Cancel</a>
             </div>
+            
           </form>
         </div>
       </div>
