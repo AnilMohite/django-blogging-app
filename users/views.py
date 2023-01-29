@@ -119,7 +119,7 @@ def deleteBlog(request,pk):
     except Exception as e:
         print(e)
 
-    return redirect('my-blogs')
+    return redirect('/user/my-blogs/')
 
 @login_required(login_url='login')
 def addBlog(request):
@@ -127,12 +127,12 @@ def addBlog(request):
         title = request.POST.get('title')
         short_content = request.POST.get('short_content')
         long_content = request.POST.get('long_content')
-        blog_image = request.FILES['blog_image']
+        blog_image = request.FILES.get('blog_image')
         user = request.user
         
         Blog.objects.create(title=title,short_content=short_content,long_content=long_content,img=blog_image,created_by=request.user,user_id=user,created_date=datetime.datetime.now())
         messages.success(request,'Blog save successfully!')
-        return redirect('my-blogs')
+        return redirect('/user/my-blogs/')
     return render(request,'add-blog.html',context={})
 
 def updateBlog(request,pk):
@@ -159,7 +159,7 @@ def updateBlog(request,pk):
             blogObj.created_date = datetime.datetime.now()
             blogObj.save()
             messages.success(request,'Blog updated successfully!')
-            return redirect('my-blogs')
+            return redirect('/user/my-blogs/')
         else:
             return redirect('/')
     else:

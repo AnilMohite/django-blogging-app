@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block body_containt %}
+<div class="container">
+    {% for message in messages %}
+        <div class="alert alert-dismissible fade show alert-{{ message.tags }}" role="alert" data-mdb-color="{{ message.tags }}" id="error-message">
+        <strong> {{ message }}</strong>
+        <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Image</th>
+                <th scope="col">Title</th>
+                <th scope="col">Created By</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% if pending_blogs|length > 0 %}
+    {% for blog in pending_blogs %}
+    <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td> <img src="{{blog.img.url}}" width="100px" alt="blog-img"></td>
+        <td>{{blog.title}}</td>
+        <td>{{blog.created_by}}</td>
+        <td>{{blog.created_date|date:"M d, Y h:i A"}}</td>
+        <td> 
+            <a href="{% url 'users:publish-blog' blog.pk %}" class="btn btn-warning">APPROVE</a>
+        </td>
+        <td>
+            <a href='/user/update-blog/{{blog.id}}' class="btn btn-sm btn-warning"><i class="fas fa-highlighter"></i></a>
+            {% comment %} <a href='#' class="btn btn-sm btn-danger" data-mdb-toggle="modal" data-mdb-target="#deleteModal-{{blog.id}}"><i class="fas fa-trash"></i></a> {% endcomment %}
+            <a href='#' class="btn btn-sm btn-danger" id="delBlogBtn-{{blog.id}}" onclick="delBlog(this.id)"><i class="fas fa-trash"></i></a>
+        </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+    </table>
+</div>
+{% endblock %}

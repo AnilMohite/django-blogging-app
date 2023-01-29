@@ -76,11 +76,16 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li>
-                <a class="dropdown-item" href="/user/my-profile">My profile</a>
+                <a class="dropdown-item" href="{% url 'users:my-profile' %}">My profile</a>
               </li>
               <li>
-                <a class="dropdown-item" href="/user/my-blogs">My Blogs</a>
+                <a class="dropdown-item" href="{% url 'users:my-blogs' %}">My Blogs</a>
               </li>
+              {% if request.user.is_staff and request.user.is_superuser %}
+              <li>
+                <a class="dropdown-item" href="{% url 'users:admin-panel' %}">Admin Panel</a>
+              </li>
+              {%endif%}
               <li>
                 <a class="dropdown-item" href="/user/logout">Logout</a>
               </li>

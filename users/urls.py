@@ -1,5 +1,7 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
+
+app_name = 'users'
 
 urlpatterns = [
     path('login/', loginUser, name='login'),
@@ -13,4 +15,6 @@ urlpatterns = [
     path('add-blog', addBlog, name='add-blog'),
     path('update-blog/<int:pk>', updateBlog, name='update-blog'),
     path('send-for-review/<int:pk>', sendForReview, name="send-for-review"),
+
+    path('admin-view/', include('users.urls_admin')),
 ]
