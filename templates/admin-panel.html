@@ -6,50 +6,54 @@
           <div class="col-xl-3 col-sm-6 col-12 mb-4">
             <a href="{% url 'users:review-blog' %}">
                 <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between px-md-1">
-                    <div>
-                        <h3 class="text-danger">{{ttl_pending_review_count}}</h3>
-                        <p class="mb-0">Review Blogs</p>
-                    </div>
-                    <div class="align-self-center">
-                        <i class="fas fa-rocket text-danger fa-3x"></i>
-                    </div>
-                    </div>
-                </div>
+                  <div class="card-body">
+                      <div class="d-flex justify-content-between px-md-1">
+                      <div>
+                          <h3 class="text-danger">{{ttl_pending_review_count}}</h3>
+                          <p class="mb-0">Review Blogs</p>
+                      </div>
+                      <div class="align-self-center">
+                          <i class="fas fa-rocket text-danger fa-3x"></i>
+                      </div>
+                      </div>
+                  </div>
                 </div>
             </a>
           </div>
           <div class="col-xl-3 col-sm-6 col-12 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex justify-content-between px-md-1">
-                  <div>
-                    <h3 class="text-success">{{ttl_user_count}}</h3>
-                    <p class="mb-0">Users</p>
-                  </div>
-                  <div class="align-self-center">
-                    <i class="far fa-user text-success fa-3x"></i>
+            <a href="{% url 'users:user-manage' %}">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between px-md-1">
+                    <div>
+                      <h3 class="text-success">{{ttl_user_count}}</h3>
+                      <p class="mb-0">Users</p>
+                    </div>
+                    <div class="align-self-center">
+                      <i class="far fa-user text-success fa-3x"></i>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
           <div class="col-xl-3 col-sm-6 col-12 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex justify-content-between px-md-1">
-                  <div>
-                    <h3 class="text-warning">{{ttl_contact_us_count}}</h3>
-                    <p class="mb-0">Contact Us</p>
-                  </div>
-                  <div class="align-self-center">
-                    <i class="far fa-comments text-warning fa-3x"></i>
+            <a href="{% url 'users:contact-us' %}">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between px-md-1">
+                    <div>
+                      <h3 class="text-warning">{{ttl_contact_us_count}}</h3>
+                      <p class="mb-0">Contact Us</p>
+                    </div>
+                    <div class="align-self-center">
+                      <i class="far fa-comments text-warning fa-3x"></i>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
        
       </section>

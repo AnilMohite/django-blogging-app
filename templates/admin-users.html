@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block body_containt %}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'users:admin-panel'%}">Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Users</li>
+        </ol>
+    </nav>
+    {% for message in messages %}
+        <div class="alert alert-dismissible fade show alert-{{ message.tags }}" role="alert" data-mdb-color="{{ message.tags }}" id="error-message">
+        <strong> {{ message }}</strong>
+        <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Last Login</th>
+                <th scope="col">Is Active</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% if users|length > 0 %}
+    {% for user in users %}
+    <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{user.username}}</td>
+        <td>{{user.first_name}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.date_joined|date:"M d, Y h:i A"}}</td>
+        <td>{{user.last_login|date:"M d, Y h:i A"}}</td>
+        <td> 
+            {% if user.is_active%}
+               <span class="success"> {{user.is_active}}</span>
+            {% else %}
+            <span class="danger"> {{user.is_active}}</span>
+            {% endif %}
+        </td>
+        <td>
+            <a href='#' class="btn btn-sm btn-warning"><i class="fas fa-highlighter"></i></a>
+            <a href='#' class="btn btn-sm btn-danger" id="delUserBtn-{{User.id}}" onclick="delUser(this.id)"><i class="fas fa-trash"></i></a>
+        </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+    </table>
+</div>
+{% endblock %}

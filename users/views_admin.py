@@ -22,7 +22,10 @@ def reviewBlog(request):
 
 
 def userManage(request):
-    pass
+    context = {}
+    context['users'] = User.objects.all()
+    # print(context['users'][1].__dict__)
+    return render(request,'admin-users.html',context=context)
 
 
 def publishBlog(request,pk):
@@ -33,3 +36,9 @@ def publishBlog(request,pk):
     messages.success(request, 'Blog Published Successfully!')
     
     return redirect('/admin-view/review-blog/')
+
+
+def contactUS(request):
+    context = {}
+    context['contacts'] = Contact.objects.all()
+    return render(request,'admin-contact-us.html',context=context)

@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block body_containt %}
 <div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'users:admin-panel'%}">Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Review Blogs</li>
+        </ol>
+    </nav>
     {% for message in messages %}
         <div class="alert alert-dismissible fade show alert-{{ message.tags }}" role="alert" data-mdb-color="{{ message.tags }}" id="error-message">
         <strong> {{ message }}</strong>

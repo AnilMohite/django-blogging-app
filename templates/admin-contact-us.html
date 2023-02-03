@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block body_containt %}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'users:admin-panel'%}">Dashboard</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+        </ol>
+    </nav>
+    {% for message in messages %}
+        <div class="alert alert-dismissible fade show alert-{{ message.tags }}" role="alert" data-mdb-color="{{ message.tags }}" id="error-message">
+        <strong> {{ message }}</strong>
+        <button type="button" class="btn-close" data-mdb-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Message</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+    {% if contacts|length > 0 %}
+    {% for contact in contacts %}
+    <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{contact.name}}</td>
+        <td>{{contact.email}}</td>
+        <td>{{contact.message}}</td>
+        <td>{{contact.created_date|date:"M d, Y h:i A"}}</td>      
+        <td>
+            <a href='#' class="btn btn-sm btn-warning"><i class="fas fa-highlighter"></i></a>
+            <a href='#' class="btn btn-sm btn-danger" id="delcontactBtn-{{contact.id}}" onclick="delcontact(this.id)"><i class="fas fa-trash"></i></a>
+        </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+    </tbody>
+    </table>
+</div>
+{% endblock %}
