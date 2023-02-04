@@ -35,7 +35,7 @@ def publishBlog(request,pk):
     blogForApproval.save()
     messages.success(request, 'Blog Published Successfully!')
     
-    return redirect('/admin-view/review-blog/')
+    return redirect('/user/admin-view/review-blog/')
 
 
 def contactUS(request):

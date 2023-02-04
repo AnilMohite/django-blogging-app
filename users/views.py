@@ -21,7 +21,7 @@ def loginUser(request):
             return redirect('/')          
         else:
             messages.warning(request,'Invalid Username or Password')  
-            return redirect('login')
+            return redirect('/user/login/')
     else:
         form = AuthenticationForm()
         return render(request ,'login.html',context={'form':form})    
@@ -42,7 +42,8 @@ def registerUser(request):
         else:
             user = User.objects.create_user(username=username,password=password,email=email,first_name=first_name,last_name=last_name)
             user.save()
-            return redirect('login')
+            messages.success(request,'User registered successfully! Login Here!')
+            return redirect('/user/login/')
     else:
         form = AuthenticationForm()
         return render(request ,'register.html',context={"form":form})
