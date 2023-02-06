@@ -149,9 +149,9 @@ STATICFILES_DIRS = (
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-#add this in the end of file
 AUTHENTICATION_BACKENDS = (
    "django.contrib.auth.backends.ModelBackend",
    "allauth.account.auth_backends.AuthenticationBackend",
 )
+
+SOCIALACCOUNT_LOGIN_ON_GET=True
