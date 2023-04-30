@@ -4,7 +4,6 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 import datetime
 
-# Create your views here.
 def index(request):
     blogs = Blog.objects.filter(is_approved=True).all().order_by('-created_date')[:3]
     return render(request,'index.html',context={'blogs':blogs})
